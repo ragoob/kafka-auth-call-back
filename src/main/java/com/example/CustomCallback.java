@@ -1,3 +1,4 @@
+package com.example;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.security.auth.AuthenticateCallbackHandler;
 import org.apache.kafka.common.security.plain.PlainAuthenticateCallback;
@@ -32,7 +33,7 @@ public class CustomCallback implements AuthenticateCallbackHandler {
         }
     }
     protected boolean authenticate(String username, char[] password) throws IOException {
-        //TB azure AD authentication
+        //TBI azure AD authentication
        return  username != null && username.equals("regoo707") && new  String(password).equals("aptar2020");
 
     }
