@@ -2,6 +2,9 @@ package com.example;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.security.auth.AuthenticateCallbackHandler;
 import org.apache.kafka.common.security.plain.PlainAuthenticateCallback;
+import org.apache.kafka.common.security.scram.ScramCredential;
+import org.apache.kafka.common.security.scram.ScramCredentialCallback;
+
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.UnsupportedCallbackException;
@@ -27,13 +30,16 @@ public class PlainServerCallbackHandler implements AuthenticateCallbackHandler {
                 PlainAuthenticateCallback plainCallback = (PlainAuthenticateCallback) callback;
                 boolean authenticated = authenticate(username, plainCallback.password());
                 plainCallback.authenticated(authenticated);
-            } else
+            }
+            else
                 throw new UnsupportedCallbackException(callback);
         }
     }
     protected boolean authenticate(String username, char[] password) throws IOException {
-        return  true;
+        return  username.equals("regoooo");
     }
+
+
     @Override
     public void close() throws KafkaException {
     }
