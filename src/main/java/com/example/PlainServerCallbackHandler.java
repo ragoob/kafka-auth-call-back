@@ -10,43 +10,31 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class CustomAuthenticateCallbackHandler implements AuthenticateCallbackHandler {
+
+public class PlainServerCallbackHandler implements AuthenticateCallbackHandler {
     private List<AppConfigurationEntry> jaasConfigEntries;
-
     @Override
-    public void configure(Map<String, ?> map, String s, List<AppConfigurationEntry> list) {
-        this.jaasConfigEntries = list;
+    public void configure(Map<String, ?> configs, String mechanism, List<AppConfigurationEntry> jaasConfigEntries) {
+        this.jaasConfigEntries = jaasConfigEntries;
     }
-
     @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         String username = null;
         for (Callback callback: callbacks) {
-            System.out.printf("Call back type %s \n",Callback.class.getTypeName());
             if (callback instanceof NameCallback)
                 username = ((NameCallback) callback).getDefaultName();
             else if (callback instanceof PlainAuthenticateCallback) {
                 PlainAuthenticateCallback plainCallback = (PlainAuthenticateCallback) callback;
                 boolean authenticated = authenticate(username, plainCallback.password());
                 plainCallback.authenticated(authenticated);
-            }
+            } else
+                throw new UnsupportedCallbackException(callback);
         }
     }
     protected boolean authenticate(String username, char[] password) throws IOException {
-        //TBI azure AD authentication
-        System.out.printf("Loggin by user %s ... \n",username);
-       return  true;
-
+        return  true;
     }
-
-
-
     @Override
     public void close() throws KafkaException {
-    }
-
-
-    public static void main(String[] args) throws IOException {
-       System.out.println("Hello");
     }
 }
