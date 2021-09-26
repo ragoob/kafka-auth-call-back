@@ -34,7 +34,7 @@ public class CustomAuthenticateCallbackHandler implements AuthenticateCallbackHa
     }
     protected boolean authenticate(String username, char[] password) throws IOException {
         //TBI azure AD authentication
-       return  username != null && username.equals("regoo707") && new  String(password).equals("aptar2020");
+       return  username != null && username.equals("regoo707");
 
     }
 
