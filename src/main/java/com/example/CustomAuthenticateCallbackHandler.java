@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class CustomCallback implements AuthenticateCallbackHandler {
+public class CustomAuthenticateCallbackHandler implements AuthenticateCallbackHandler {
     private List<AppConfigurationEntry> jaasConfigEntries;
 
     @Override
@@ -46,6 +46,6 @@ public class CustomCallback implements AuthenticateCallbackHandler {
 
 
     public static void main(String[] args) throws IOException {
-
+       System.out.println("Hello");
     }
 }
