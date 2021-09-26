@@ -22,19 +22,19 @@ public class CustomAuthenticateCallbackHandler implements AuthenticateCallbackHa
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         String username = null;
         for (Callback callback: callbacks) {
+            System.out.printf("Call back type %s \n",Callback.class.getTypeName());
             if (callback instanceof NameCallback)
                 username = ((NameCallback) callback).getDefaultName();
             else if (callback instanceof PlainAuthenticateCallback) {
                 PlainAuthenticateCallback plainCallback = (PlainAuthenticateCallback) callback;
                 boolean authenticated = authenticate(username, plainCallback.password());
                 plainCallback.authenticated(authenticated);
-            } else
-                throw new UnsupportedCallbackException(callback);
+            }
         }
     }
     protected boolean authenticate(String username, char[] password) throws IOException {
         //TBI azure AD authentication
-        System.out.printf("Loggin by user %s ...",username);
+        System.out.printf("Loggin by user %s ... \n",username);
        return  true;
 
     }
